@@ -1,14 +1,26 @@
-def read_file(path_file:str)->None:
+def read_file(path_file:str) -> None:
     
+    LEFT_BRACKET:str = "["
+
+    RIGHT_BRACKET:str = "]"
+
+    text:str = "" 
+
     with open(path_file, 'r') as f:
         
-        while byte := f.read(15):  # read 15 byte at a time
-        
-            if not byte:  # check for EOF
+        while text := f.read(15):  # read 15 byte at a time
+
+            if text.find(LEFT_BRACKET) > -1:
+                print("start")
+
+            if text.find(RIGHT_BRACKET) > -1:
+                print("end")
+            
+            if not text:  # check for EOF
                 print("chegou aqui")
                 break
             # process the byte (e.g., print its ASCII value)
-            print(">>>", byte)
+            print(">>>", text)
 
 def main() -> None:
 
