@@ -1,7 +1,7 @@
 
 def read_message(path_file, total_bytes):
 
-    def get_raw_list(raw: str) -> list[dict[int:str]]:
+    def convert_to_raw_list(raw: str) -> list[dict[int:str]]:
 
         raw_list: list[dict[int:str]] = []
 
@@ -52,7 +52,7 @@ def read_message(path_file, total_bytes):
 
         return raw_text[:-1]
 
-    return display_message(get_raw_list(get_raw_text(path_file, total_bytes)))
+    return display_message(convert_to_raw_list(get_raw_text(path_file, total_bytes)))
 
 
 def main() -> None:
