@@ -1,36 +1,36 @@
 
 def read_message(path_file, total_bytes):
 
-    def create_dict(raw: str) -> list[dict[int:str]]:
+    def get_raw_list(raw: str) -> list[dict[int:str]]:
 
-        obj: list[dict[int:str]] = []
+        raw_list: list[dict[int:str]] = []
 
         for text in raw.split("|"):
-            obj.append({"code": int(text[1:3]), "data": text[5:-2]})
+            raw_list.append({"index": int(text[1:3]), "raw-text": text[5:-2]})
 
-        return obj
+        return raw_list
 
-    def display_message(message: list[dict]) -> None:
+    def display_message(raw_list: list[dict]) -> None:
 
-        for entry in sorted(message, key=lambda k: k['code']):
-            print(entry["data"], end="")
+        for entry in sorted(raw_list, key=lambda k: k['index']):
+            print(entry["raw-text"], end="")
 
     def build_raw_text(raw: str) -> tuple[str, int]:
 
         append: int = 1
 
-        data: str = ""
+        raw_text: str = ""
 
         for chr in list(raw):
 
-            data += chr
+            raw_text += chr
 
             if chr == "]":
-                data += "|"
+                raw_text += "|"
                 append = 0
                 break
 
-        return data, append
+        return raw_text, append
 
     def get_raw_text(path_file: str, total_bytes: int) -> str:
 
@@ -52,7 +52,7 @@ def read_message(path_file, total_bytes):
 
         return raw_text[:-1]
 
-    return display_message(create_dict(get_raw_text(path_file, total_bytes)))
+    return display_message(get_raw_list(get_raw_text(path_file, total_bytes)))
 
 
 def main() -> None:
