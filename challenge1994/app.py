@@ -32,7 +32,7 @@ def build_raw_text(raw: str) -> tuple[str, int]:
     return data, append
 
 
-def read_file(path_file: str) -> None:
+def get_raw_text(path_file: str) -> str:
 
     append: int = 0
 
@@ -50,8 +50,12 @@ def read_file(path_file: str) -> None:
                                               if index > -1 else raw_data)
                 raw_text += text
 
-    if raw_text:
-        display_message(create_dict(raw_text[:-1]))
+    return raw_text[:-1]
+
+
+def read_message(path_file: str) -> None:
+
+    display_message(create_dict(get_raw_text(path_file)))
 
 
 def main() -> None:
@@ -59,7 +63,7 @@ def main() -> None:
     try:
         path_file: str = "./texto.dat"
 
-        read_file(path_file)
+        read_message(path_file)
 
     except Exception as e:
 
