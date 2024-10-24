@@ -1,4 +1,4 @@
-def display_message(message) -> None:
+def display_message(message: list[dict]) -> None:
 
     for entry in sorted(message, key=lambda k: k['code']):
         print(entry["data"], end="")
