@@ -32,7 +32,7 @@ def build_raw_text(raw: str) -> tuple[str, int]:
     return data, append
 
 
-def get_raw_text(path_file: str) -> str:
+def get_raw_text(path_file: str, total_bytes: int) -> str:
 
     append: int = 0
 
@@ -40,7 +40,7 @@ def get_raw_text(path_file: str) -> str:
 
     with open(path_file, 'r') as f:
 
-        while raw_data := f.read(15):  # read 15 byte at a time
+        while raw_data := f.read(total_bytes):  # read 15 byte at a time
 
             index = raw_data.find("[")
 
@@ -55,7 +55,7 @@ def get_raw_text(path_file: str) -> str:
 
 def read_message(path_file: str) -> None:
 
-    display_message(create_dict(get_raw_text(path_file)))
+    display_message(create_dict(get_raw_text(path_file, total_bytes=15)))
 
 
 def main() -> None:
