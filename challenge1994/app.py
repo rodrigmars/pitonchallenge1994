@@ -1,10 +1,12 @@
 def display_message(message) -> None:
+
     for entry in sorted(message, key=lambda k: k['code']):
         print(entry["data"], end="")
 
 
-def create_dict(raw: str) -> list[dict]:
-    obj = []
+def create_dict(raw: str) -> list[dict[int:str]]:
+
+    obj: list[dict[int:str]] = []
 
     for text in raw.split("|"):
         obj.append({"code": int(text[1:3]), "data": text[5:-2]})
@@ -12,12 +14,14 @@ def create_dict(raw: str) -> list[dict]:
     return obj
 
 
-def build_frase(raw: str):
+def build_raw_text(raw: str) -> tuple[str, int]:
 
-    append = 1
+    append: int = 1
+
     data: str = ""
 
     for chr in list(raw):
+
         data += chr
 
         if chr == "]":
@@ -31,6 +35,7 @@ def build_frase(raw: str):
 def read_file(path_file: str) -> None:
 
     append: int = 0
+
     raw_text: str = ""
 
     with open(path_file, 'r') as f:
@@ -41,8 +46,8 @@ def read_file(path_file: str) -> None:
 
             if index > -1 or append > 0:
 
-                text, append = build_frase(raw_data[index:]
-                                           if index > -1 else raw_data)
+                text, append = build_raw_text(raw_data[index:]
+                                              if index > -1 else raw_data)
                 raw_text += text
 
     if raw_text:
@@ -59,8 +64,6 @@ def main() -> None:
     except Exception as e:
 
         print(e)
-
-    ...
 
 
 main()
