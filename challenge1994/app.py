@@ -6,7 +6,7 @@ def read_message(path_file, total_bytes):
         raw_list: list[dict[int:str]] = []
 
         for text in raw.split("|"):
-            raw_list.append({"index": int(text[1:3]), "raw-text": text[5:-2]})
+            raw_list.append({"index": text[1:3], "raw-text": text[5:-2]})
 
         return raw_list
 
